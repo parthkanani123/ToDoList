@@ -9,7 +9,7 @@ import Foundation
 
 struct WeekModel {
     let index: Int
-    let date: [Date]
+    let dates: [Date]
     let referenceDate: Date
 }
 

@@ -32,7 +32,7 @@ class DateManager: ObservableObject {
     private func week(for date: Date, with index: Int) -> WeekModel {
         var result: [Date] = .init()
         
-        guard let startOfWeek = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)) else { return .init(index: index, date: [], referenceDate: date) }
+        guard let startOfWeek = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)) else { return .init(index: index, dates: [], referenceDate: date) }
         
         (0...6).forEach { day in
             if let weekday = Calendar.current.date(byAdding: .day, value: day, to: startOfWeek) {
@@ -40,7 +40,7 @@ class DateManager: ObservableObject {
             }
         }
         
-        return .init(index: index, date: result, referenceDate: date)
+        return .init(index: index, dates: result, referenceDate: date)
     }
     
     func selectToday() {
@@ -51,7 +51,16 @@ class DateManager: ObservableObject {
         selectedDate = Calendar.current.startOfDay(for: date)
     }
     
-    func update() {
+    func update(to direction: SliderTimeDirection) {
+        switch direction {
+        case .future:
+            selectedDate = Calendar.current.date(byAdding: .day, value: 7, to: selectedDate)!
+        case .past:
+            selectedDate = Calendar.current.date(byAdding: .day, value: -7, to: selectedDate)!
+        case .unknown:
+            selectedDate = selectedDate
+        }
         
+        calcWeeks(with: selectedDate)
     }
 }
