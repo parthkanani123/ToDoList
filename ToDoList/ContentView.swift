@@ -26,6 +26,7 @@ struct ContentView: View {
                 }
                 .scrollIndicators(.hidden)
             }
+            .padding()
             .overlay(alignment: .bottomTrailing) {
                 Button {
                     createNewTask.toggle()
