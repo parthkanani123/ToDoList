@@ -26,7 +26,7 @@ struct DateHeaderView: View {
                 HStack {
                     Spacer()
                     
-                    Text(dateManager.selectedDate.toString(format: "EEEE, dd.mm.yyyy"))
+                    Text(dateManager.selectedDate.toString(format: "EEEE, dd.MM.yyyy"))
                         .font(.system(size: 10, design: .rounded))
                         .foregroundStyle(Color.gray)
                 }
